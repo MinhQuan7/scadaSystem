@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Water Pump SCADA</title>
+    <title>Advanced Water Pump SCADA</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #282c34;
-            color: #ffffff;
+            background-color: #f4f4f4;
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,128 +17,112 @@
         }
         #scada-system {
             text-align: center;
-            border: 2px solid #61dafb;
+            border: 2px solid #ccc;
             padding: 20px;
             border-radius: 10px;
-            background-color: #20232a;
-            box-shadow: 0px 0px 20px 0px #61dafb;
+            background-color: #fff;
+            box-shadow: 0px 0px 20px 0px #ccc;
             position: relative;
-            width: 500px;
+            width: 1000px;
+            height: 600px;
         }
         h2 {
-            color: #61dafb;
+            color: #333;
             font-size: 24px;
             margin-bottom: 20px;
         }
-        .tank {
-            width: 150px;
-            height: 300px;
-            border: 3px solid #61dafb;
-            border-radius: 10px;
-            background-color: #e0f7fa;
-            position: relative;
-            margin: 20px auto;
-            overflow: hidden;
-        }
-        .water {
-            width: 100%;
-            height: 0;
-            background: linear-gradient(180deg, #00bcd4, #0288d1);
-            border-radius: 0 0 10px 10px;
+        .component {
             position: absolute;
-            bottom: 0;
-            transition: height 1s ease-in-out;
+            text-align: center;
+        }
+        .tank {
+            width: 100px;
+            height: 200px;
+            position: absolute;
         }
         .pipe {
+            width: 100px;
+            height: 20px;
+            background-color: #999;
             position: absolute;
-            width: 200px;
-            height: auto;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
-        .valve, .pump {
-            position: absolute;
-            width: 50px;
-            height: auto;
-        }
-        .valve {
-            left: 50%;
-            top: 40%;
-            transform: translate(-50%, -50%);
-        }
-        .pump {
-            left: 50%;
-            top: 70%;
-            transform: translate(-50%, -50%);
-        }
-        .pump button {
-            padding: 15px 30px;
-            font-size: 18px;
+        .pump, .valve {
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
             font-weight: bold;
-            background-color: #61dafb;
-            color: #282c34;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px;
         }
-        .pump button:hover {
-            background-color: #21a1f1;
-        }
-        #status {
-            font-size: 18px;
-            margin-top: 20px;
-            color: #f50057;
+        .pump-label, .valve-label {
+            position: absolute;
+            top: 70px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div id="scada-system">
         <h2>Water Pump SCADA</h2>
-        <img src="pipe.svg" class="pipe" alt="Pipe">
-        <div class="tank">
-            <div class="water" id="water-level"></div>
+
+        <!-- Tank 1 -->
+        <div class="component tank" style="left: 50px; top: 50px;">
+            <img src="https://cdn.pixabay.com/photo/2012/04/26/19/43/pipe-42806_960_720.png" alt="Tank 1">
+            <div style="background-color: #00bcd4; height: 50%; margin-top: 50%;">50%</div>
         </div>
-        <img src="valve.svg" class="valve" alt="Valve">
-        <img src="pump.svg" class="pump" alt="Pump">
-        <div class="pump">
-            <button onclick="togglePump()">Toggle Pump</button>
+
+        <!-- Pump 1 -->
+        <div class="component pump" style="left: 200px; top: 100px;" onclick="togglePump('Pump 1')">
+            <img src="https://cdn.pixabay.com/photo/2012/04/13/21/07/water-pump-32859_960_720.png" alt="Pump 1">
+            <div class="pump-label">Pump 1</div>
         </div>
-        <div id="status"></div>
+
+        <!-- Valve 1 -->
+        <div class="component valve" style="left: 300px; top: 200px;" onclick="toggleValve('Valve 1')">
+            <img src="https://cdn.pixabay.com/photo/2014/04/02/10/24/water-valve-304196_960_720.png" alt="Valve 1">
+            <div class="valve-label">Valve 1</div>
+        </div>
+
+        <!-- Pipe 1 -->
+        <div class="component pipe" style="left: 120px; top: 100px;">
+            <img src="https://cdn.pixabay.com/photo/2012/04/26/19/43/pipe-42806_960_720.png" alt="Pipe">
+        </div>
+
+        <!-- Tank 2 -->
+        <div class="component tank" style="left: 700px; top: 50px;">
+            <img src="https://cdn.pixabay.com/photo/2012/04/26/19/43/pipe-42806_960_720.png" alt="Tank 2">
+            <div style="background-color: #00bcd4; height: 30%; margin-top: 70%;">30%</div>
+        </div>
+
+        <!-- Pump 2 -->
+        <div class="component pump" style="left: 550px; top: 300px;" onclick="togglePump('Pump 2')">
+            <img src="https://cdn.pixabay.com/photo/2012/04/13/21/07/water-pump-32859_960_720.png" alt="Pump 2">
+            <div class="pump-label">Pump 2</div>
+        </div>
+
+        <!-- Valve 2 -->
+        <div class="component valve" style="left: 650px; top: 400px;" onclick="toggleValve('Valve 2')">
+            <img src="https://cdn.pixabay.com/photo/2014/04/02/10/24/water-valve-304196_960_720.png" alt="Valve 2">
+            <div class="valve-label">Valve 2</div>
+        </div>
+
+        <!-- Pipe 2 -->
+        <div class="component pipe" style="left: 620px; top: 300px;">
+            <img src="https://cdn.pixabay.com/photo/2012/04/26/19/43/pipe-42806_960_720.png" alt="Pipe">
+        </div>
     </div>
 
     <script>
-        let isPumpOn = false;
-        let waterLevel = 0;
-
-        function togglePump() {
-            isPumpOn = !isPumpOn;
-            document.getElementById('status').innerText = isPumpOn ? "Pump is ON" : "Pump is OFF";
-
-            if (isPumpOn) {
-                startFilling();
-            } else {
-                stopFilling();
-            }
+        function togglePump(pumpName) {
+            alert(pumpName + ' toggled');
+            // Logic to toggle pump status
         }
 
-        function startFilling() {
-            const waterElement = document.getElementById('water-level');
-            waterLevel = 0;
-            const interval = setInterval(() => {
-                if (waterLevel >= 100 || !isPumpOn) {
-                    clearInterval(interval);
-                } else {
-                    waterLevel += 10;
-                    waterElement.style.height = waterLevel + '%';
-                }
-            }, 1000);
-        }
-
-        function stopFilling() {
-            // Additional logic for stopping pump can be added here
+        function toggleValve(valveName) {
+            alert(valveName + ' toggled');
+            // Logic to toggle valve status
         }
     </script>
 </body>
